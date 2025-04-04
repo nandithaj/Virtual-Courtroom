@@ -1,1 +1,1 @@
-# https-github.com-RSET-CSE-DEPARTMENT-RSET2021-25-S8-Gamma
+# RSET2021-25-S8-Gamma
