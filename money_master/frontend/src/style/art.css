@@ -1,0 +1,126 @@
+/* art.css */
+
+/* Overall container as a flex row */
+.art-container {
+  width: 90%;
+  margin: 40px auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  box-sizing: border-box;
+}
+
+/* Left Box: Personalized Advice (3/4 width) */
+.personal-advice-box {
+  flex: 3;
+  max-width: 75%;
+  background-color: #e8f0fe;
+  border: 1px solid #ccc;
+  /* padding: 20px; */
+  border-radius: 8px;
+  height: 500px; /* fixed height */
+  overflow-y: auto;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.personal-advice-box .box-header {
+  position: sticky;
+  top: 0;
+  background: #e8f0fe;
+  padding: 10px 0;
+  border-bottom: 1px solid #ccc;
+  z-index: 1;
+}
+
+.personal-advice-box h2 {
+  text-align: center;
+  margin: 0;
+  color: #333;
+}
+
+/* Right Box: Global News (1/4 width) */
+.global-news-box {
+  flex: 1;
+  max-width: 25%;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  /* padding: 20px; */
+  border-radius: 8px;
+  height: 500px; /* fixed height */
+  overflow-y: auto;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.global-news-box .box-header {
+  position: sticky;
+  top: 0;
+  background: #ffffff;
+  padding: 10px 0;
+  border-bottom: 1px solid #ccc;
+  z-index: 1;
+}
+
+.global-news-box h2 {
+  text-align: center;
+  margin: 0;
+  color: #333;
+}
+
+/* News Content Styles */
+.news-content {
+  margin-top: 10px;
+  padding: 20px;
+}
+
+/* Styles for each news item */
+.item {
+  background-color: #f0f4f8;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.item h3 {
+  margin: 0;
+  color: #2c3e50;
+  font-weight: bold;
+  font-size: 0.95rem;
+}
+
+.details {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out, opacity 0.3s ease;
+  margin-top: 5px;
+  color: #34495e;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  opacity: 0;
+}
+
+.details.show {
+  max-height: 200px; /* adjust if needed */
+  opacity: 1;
+  padding-top: 5px;
+}
+
+/* Optional hover effects for news items */
+.item:hover {
+  background-color: #d5e6f5;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Additional styling for markdown advice content */
+.advice-content {
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.5;
+  margin-top: 10px;
+  padding: 20px;
+}

@@ -1,0 +1,2 @@
+the article summarizer doesn't work properly
+probably gemini key depleted or something will check out

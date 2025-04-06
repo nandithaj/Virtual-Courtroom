@@ -1,0 +1,10 @@
+Flask
+google-generativeai
+flask-cors
+pandas
+prophet
+matplotlib
+gunicorn
+groq
+nsetools
+yfinance

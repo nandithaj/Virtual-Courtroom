@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article Summarizer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+<div class="main">
+    <form action = '/submit' method="post" class="right-aligned-form">
+        <input type="text" name = 'user_input' placeholder="Enter text here">
+        <button type = 'submit'>Submit</button>
+        <p id="fraud_details">{{x}}</p>
+    </form>
+
+    <div class="container">
+        <div class="scrollable-container">
+            <div class="item">
+                <h3>{{ messagehead[0] if messagehead[0] else "No message generated yet." }}</h3>
+                <p class="details">{{ messagebody[0] if messagebody[0] else "No message generated yet."}}</p>
+            </div>
+            <div class="item">
+                <h3>{{ messagehead[1] if messagehead[1] else "No message generated yet." }}</h3>
+                <p class="details">{{ messagebody[1] if messagebody[1] else "No message generated yet." }}</p>
+            </div>
+            <div class="item">
+                <h3>{{ messagehead[2] if messagehead[2] else "No message generated yet." }}</h3>
+                <p class="details">{{ messagebody[2] if messagebody[2] else "No message generated yet." }}</p>
+            </div>
+            <!-- Add more items as needed -->
+        </div>
+    </div>
+</div>
+
+    <script>
+
+        $(document).ready(function() {
+            $('.item').click(function() {
+                var isExpanded = $(this).hasClass('expanded');
+
+                $('.item').removeClass('expanded');
+                $('.details').slideUp();
+
+                if (!isExpanded) {
+                    $(this).addClass('expanded');
+                    $(this).find('.details').slideDown();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

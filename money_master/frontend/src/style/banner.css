@@ -1,0 +1,32 @@
+.banner {
+  background-color: #282c33;
+  padding: 15px;
+  text-align: center;
+  width: 100%;
+}
+
+.icon-container {
+  display: flex;
+  justify-content: center;
+  gap: 75px;
+}
+
+.icon-container .fas {
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.icon-container .fas:hover {
+  color: #f0a500;
+}
+
+.banner,
+.icon-container {
+  pointer-events: auto;
+}
+
+.icon {
+  pointer-events: auto;
+}

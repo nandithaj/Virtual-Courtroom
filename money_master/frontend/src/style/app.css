@@ -1,0 +1,92 @@
+/* Global App Styles */
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+}
+
+.App-header {
+  background-color: #282c34;
+  color: white;
+  width: 100%;
+  margin-top: -22px;
+  height: 66px;
+  text-align: center;
+}
+
+/* Generic container and main styles */
+main {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Art Section Styles */
+.art-section {
+  /* padding: 20px 0;  */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  flex-grow: 1;
+}
+
+/* Chatbot Section Styles */
+.chatbot-section {
+  width: 90%;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+  overflow-y: auto;
+  box-sizing: border-box;
+  margin: 40px auto;
+}
+
+/* Chart Section Styles */
+.chart-section {
+  width: 90%;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 40px auto;
+  margin-bottom: 80px;
+}
+
+/* Banner Styles */
+.Banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #333;
+  padding: 10px;
+  text-align: center;
+  z-index: 1000;
+}
+
+/* Common Styles for Inputs and Buttons */
+input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
