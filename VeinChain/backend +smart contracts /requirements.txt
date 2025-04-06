@@ -1,0 +1,14 @@
+Flask
+web3
+pycryptodome
+flasgger
+numpy
+pillow
+scikit-image
+torch
+torchvision
+gunicorn
+flask-cors
+os
+opencv-python
+python-dotenv
