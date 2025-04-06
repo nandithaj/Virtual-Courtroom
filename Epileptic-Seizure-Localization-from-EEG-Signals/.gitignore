@@ -1,0 +1,43 @@
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+
+# Virtual environment
+myenv/
+
+# Test files
+testbench/
+
+# Ignore everything in data/
+data/*
+
+# Don't ignore patient folders
+!data/patient1/
+!data/patient3/
+!data/patient5/
+
+# Ignore everything inside patient folders
+data/patient1/*
+data/patient3/*
+data/patient5/*
+
+# Don't ignore edf_data/, eeg_data/, and profile.txt in each patient folder
+!data/patient1/edf_data/
+!data/patient1/eeg_data/
+!data/patient1/profile.txt
+
+!data/patient3/edf_data/
+!data/patient3/eeg_data/
+!data/patient3/profile.txt
+
+!data/patient5/edf_data/
+!data/patient5/eeg_data/
+!data/patient5/profile.txt
+
+# Ignore all files inside edf_data/ and eeg_data/ but keep the folders
+data/patient1/edf_data/*
+data/patient1/eeg_data/*
+data/patient3/edf_data/*
+data/patient3/eeg_data/*
+data/patient5/edf_data/*
+data/patient5/eeg_data/*
