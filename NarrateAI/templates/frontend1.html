@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Video Description Uploader</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; background: #f7f7f7; color: #333; }
+    .container { max-width: 800px; margin: auto; padding: 20px; background: #fff; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    h1, h2 { text-align: center; }
+    button { padding: 10px 15px; margin: 10px; border: none; background: #007bff; color: #fff; cursor: pointer; border-radius: 4px; }
+    button:disabled { background: #aaa; cursor: not-allowed; }
+    #fileList { list-style: none; padding: 0; margin: 20px 0; max-height: 300px; overflow-y: auto; border: 1px solid #ccc; border-radius: 4px; }
+    #fileList li { padding: 10px; border-bottom: 1px solid #eee; cursor: pointer; }
+    #fileList li.selected { background-color: #e0e0e0; }
+    #uploadBtn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      font-size: 24px;
+      padding: 20px 30px;
+      width: 290px;
+      height: 200px;
+    }
+    #status { margin-top: 20px; font-weight: bold; text-align: center; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0; }
+    *:focus { outline: 3px solid yellow; }
+    #helpBtn { position: fixed; top: 20px; right: 20px; }
+  </style>
+</head>
+<body>
+  <a href="#fileList" class="sr-only" aria-label="Skip to file list">Skip to file list</a>
+  <div class="container">
+    <h1>Video Description Uploader</h1>
+    
+    <button id="helpBtn" aria-label="Help">Help</button>
+    
+    <input type="file" id="fileInput" multiple style="display: none;">
+    <button id="addFilesBtn" aria-label="Add Files to Directory">Add Files to Directory</button>
+    
+    <h2>Available Files</h2>
+    <ul id="fileList" aria-live="polite" aria-label="Available files for processing"></ul>
+    
+    <button id="uploadBtn" disabled aria-label="Upload Selected File">Upload Selected File</button>
+    <div id="status" aria-live="assertive"></div>
+
+    <h2>Processed Video</h2>
+<video id="processedVideo" controls style="display: none; width: 100%; max-height: 400px;"></video>
+
+  </div>
+  
+  <script>
+    const addFilesBtn = document.getElementById('addFilesBtn');
+    const fileInput = document.getElementById('fileInput');
+    const fileList = document.getElementById('fileList');
+    const uploadBtn = document.getElementById('uploadBtn');
+    const helpBtn = document.getElementById('helpBtn');
+    const statusDiv = document.getElementById('status');
+    let selectedFile = null;
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.rate = 1.5;
+      speechSynthesis.cancel();
+      speechSynthesis.speak(utterance);
+    }
+
+    function loadFiles() {
+      fileList.innerHTML = '';
+      fetch('http://127.0.0.1:5000/list_files')
+        .then(response => response.json())
+        .then(data => {
+          data.files.forEach(file => {
+            const li = document.createElement('li');
+            li.textContent = file;
+            li.setAttribute('tabindex', '0');
+            li.setAttribute('aria-label', file);
+            li.addEventListener('mouseover', () => speak(file));
+            li.addEventListener('focus', () => speak(file));
+            
+            li.addEventListener('click', () => {
+              document.querySelectorAll('#fileList li').forEach(item => item.classList.remove('selected'));
+              li.classList.add('selected');
+              selectedFile = file;
+              uploadBtn.disabled = false;
+              speak(`${file} selected. Now go to the bottom right corner for the upload button.`);
+            });
+            fileList.appendChild(li);
+          });
+        })
+        .catch(error => console.error('Error loading files:', error));
+    }
+
+    addFilesBtn.addEventListener('mouseover', () => speak('Add Files to Directory'));
+    addFilesBtn.addEventListener('focus', () => speak('Add Files to Directory'));
+    addFilesBtn.addEventListener('click', () => fileInput.click());
+
+     helpBtn.addEventListener('mouseover', () => speak('Help'));
+    helpBtn.addEventListener('click', () => {
+      speak('This is the Video Description Uploader. Use the Add Files to Directory button to add videos. Select a file from the list and click the Upload Selected File button to process it.');
+    });
+    
+    fileInput.addEventListener('change', () => {
+      const files = Array.from(fileInput.files);
+      const formData = new FormData();
+      files.forEach(file => formData.append('files', file));
+
+      fetch('http://127.0.0.1:5000/add_files', { method: 'POST', body: formData })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            statusDiv.textContent = 'Files added successfully.';
+            speak('Files added successfully');
+            loadFiles();
+          } else {
+            statusDiv.textContent = 'Error: ' + data.error;
+            speak('Error adding files');
+          }
+        })
+        .catch(error => {
+          statusDiv.textContent = 'Upload failed: ' + error;
+          speak('Upload failed');
+        });
+    });
+
+    uploadBtn.addEventListener('mouseover', () => speak('Upload Selected File'));
+    uploadBtn.addEventListener('focus', () => speak('Upload Selected File'));
+    uploadBtn.addEventListener('click', () => {
+      statusDiv.innerHTML = `Processing video!`;
+      speak('Processing video.');
+      if (!selectedFile) return;
+      fetch('http://127.0.0.1:5000/upload_selected', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ filename: selectedFile })
+      })
+      .then(response => response.json())
+      .then(data => {
+    if (data.success) {
+        statusDiv.innerHTML = `Processing complete! Loading video...`;
+        speak('Processing complete! Loading video.');
+
+        // Set the video source and show it
+        const videoElement = document.getElementById('processedVideo');
+        videoElement.src = `http://127.0.0.1:5000/get_video/${selectedFile.replace('.mp4', '')}`;
+
+        //videoElement.src = `http://127.0.0.1:5000/get_video/${selectedFile}`;
+        videoElement.style.display = 'block';
+        videoElement.load();
+    } else {
+        statusDiv.textContent = 'Error: ' + data.error;
+        speak('Error processing file');
+    }
+})
+
+      .catch(error => {
+        statusDiv.textContent = 'Upload failed: ' + error;
+        speak('Upload failed');
+      });
+    });
+
+    let edgeSpoken = false; // Flag to prevent repeated speech
+
+document.addEventListener('mousemove', event => {
+  const atEdge =
+    event.clientX <= 5 ||
+    event.clientY <= 5 ||
+    window.innerWidth - event.clientX <= 5 ||
+    window.innerHeight - event.clientY <= 5;
+
+  if (atEdge && !edgeSpoken) {
+    edgeSpoken = true; // Prevent immediate repetition
+    speak('You have reached the end of the window');
+    
+    setTimeout(() => {
+      edgeSpoken = false; // Reset flag after a short delay
+    }, 2000);
+  }
+});
+
+
+    loadFiles();
+  </script>
+</body>
+</html>
