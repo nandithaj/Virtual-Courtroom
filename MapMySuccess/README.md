@@ -41,12 +41,6 @@ A machine learning-based web application that predicts the potential success of 
 
 ---
 
-## 📷 Screenshots
-
-> Add screenshots of your frontend map + result (optional)
-
----
-
 ## 🧰 Software Requirements
 
 | Tool            | Version/Details                |
@@ -135,10 +129,6 @@ They are loaded in `model_predict.py` when predicting based on API input.
 - Rebecca Liz Punnoose (U2103171)
 - Richu Kurian (U2103175)
 - Rohan Joseph Arun (U2103180)
-- Rajagiri Computer Science Department
 
 ---
 
-## 📝 License
-
-MIT License
