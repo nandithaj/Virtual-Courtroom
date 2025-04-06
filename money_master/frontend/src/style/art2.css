@@ -1,0 +1,97 @@
+/* art2.css */
+
+/* Fixed container for the Art2 component */
+.art2-container {
+  width: 800px; /* Fixed width */
+  height: 520px; /* Fixed height */
+  margin: auto;
+  margin-bottom: 75px;
+  padding: 20px;
+  background-color: #f8f8f8;
+  /* border: 2px solid #007bff; */
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  overflow-y: auto; /* Scroll if content overflows */
+}
+
+/* Heading style */
+.art2-container h2 {
+  font-size: 2rem;
+  text-align: center;
+  /* color: #007bff; */
+  margin-bottom: 20px;
+}
+
+/* Form styling */
+.art2-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.art2-form label {
+  font-size: 1rem;
+  margin-right: 10px;
+}
+
+.art2-form input[type="text"] {
+  flex: 1;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.art2-form button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.art2-form button:hover {
+  background-color: #0056b3;
+}
+
+/* Error message style */
+.art2-error {
+  color: red;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Summary display styling */
+.art2-summary {
+  background-color: #fff;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-family: sans-serif;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+/* Sentiment indicator styling */
+.art2-sentiment {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.art2-sentiment.green {
+  color: green;
+}
+
+.art2-sentiment.red {
+  color: red;
+}
+
+.art2-sentiment.neutral {
+  color: gray;
+}
