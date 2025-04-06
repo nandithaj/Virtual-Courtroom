@@ -1,2 +1,1 @@
-# money-master
-money master is a financial strategy application
+# RSET2021-25-S8-Gamma
