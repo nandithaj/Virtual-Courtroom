@@ -1,0 +1,102 @@
+@import "tailwindcss";
+/* Reset body margins and paddings */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  height: 100%;
+  overflow: hidden; /* Prevents scrolling */
+}
+
+/* App container to include navbar and content */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* Navbar styling */
+.navbar {
+  width: 100%;
+  padding: 15px 20px;
+  background-color: #0e6538; /* Dark blue-gray */
+  color: #ffffff; /* White text */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  display: flex;
+  align-items: center;
+}
+
+.navbar h1 {
+  margin: 0;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+/* Content section to arrange sidebar and map side by side */
+.content {
+  display: flex;
+  flex: 1;
+}
+
+/* Sidebar styling */
+.sidebar {
+  width: 30%; /* Adjusts sidebar width */
+  padding: 20px;
+  background-color: #f4f4f4;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Adds a shadow to the right */
+  overflow-y: auto;
+  padding-top: 20px; /* Add padding at the top to lower text */
+}
+
+.sidebar h3 {
+  font-size: 1.2em;
+  margin: 0 0 10px;
+  color: #333;
+}
+
+.sidebar p {
+  margin: 5px 0;
+  font-size: 0.9em;
+  color: #555;
+}
+
+.sidebar h4 {
+  margin-top: 20px;
+  color: #333;
+  font-weight: bold;
+}
+
+.sidebar strong {
+  color: #10a834; /* Success rate color (green) */
+}
+
+/* Map container styling */
+.map-container {
+  width: 70%; /* Adjusts map container width */
+  height: 100%;
+  display: flex;
+}
+
+#map {
+  width: 100%; /* Make the map take the full width of the map-container */
+  height: 100%; /* Make the map take the full height of the map-container */
+}
+
+/* Optional styling for responsiveness on small screens */
+@media (max-width: 768px) {
+  .content {
+    flex-direction: column;
+  }
+
+  .sidebar, .map-container {
+    width: 100%; /* Both take full width on small screens */
+    height: 50vh; /* Each takes half the screen height */
+  }
+}
+
+
+.inp-div{
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem;
+}
