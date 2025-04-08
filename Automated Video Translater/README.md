@@ -36,5 +36,5 @@
 
 ## 🚀 How to Run
 
-1.Run app.py in Frontend
-2.Upload video in the html and click convert👍
+1. Run app.py in Frontend
+2. Upload video in the html and click convert👍
