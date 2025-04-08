@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automated Video Translator</title>
+    <link rel="stylesheet" href="static/mp.css">
+</head>
+<body>
+    <h1>AUTOMATED VIDEO TRANSLATOR</h1>
+    <div class="main_container">
+        <div class="first_container">
+            <!-- Upload Video Button -->
+            <button class="btn-primary" onclick="document.getElementById('fileInput').click();">+ Upload Video</button>
+
+            <!-- Hidden File Input -->
+            <input type="file" id="fileInput" accept="video/*" style="display: none;" onchange="showFileName()">
+
+            <!-- Video Preview -->
+            <div id="fileContainer" class="file-info" style="display: none;">
+                <video id="videoPreview" height="240" controls style="display: none; max-height: 300px;"></video>
+                <span class="cancel_button" onclick="cancelFile()">×</span>
+            </div>
+
+            <!-- Convert Button -->
+            <button class="btn-secondary" onclick="uploadAndProcessVideo()">Convert</button>
+        </div>
+
+        <div class="second_container">
+            <!-- Loading Spinner -->
+            <div id="loadingSpinner" class="spinner" style="display: none;"></div>
+
+
+            <!-- Processed Video Preview -->
+            <video id="processedVideo" controls style="display: none; width: 80%; margin-top: 20px;"></video>
+
+
+            <!-- Error Message -->
+            <div id="errorMessage" style="display: none; color: red; margin-top: 20px;">
+                Error processing video. Please try again.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showFileName() {
+            const fileInput = document.getElementById('fileInput');
+            const fileContainer = document.getElementById('fileContainer');
+            const videoPreview = document.getElementById('videoPreview');
+
+            if (fileInput.files.length > 0) {
+                fileContainer.style.display = "flex";
+                const file = fileInput.files[0];
+                const videoURL = URL.createObjectURL(file);
+                videoPreview.src = videoURL;
+                videoPreview.style.display = 'block';
+            }
+        }
+
+        function cancelFile() {
+            const fileContainer = document.getElementById('fileContainer');
+            const videoPreview = document.getElementById('videoPreview');
+            document.getElementById("fileInput").value = "";
+
+            fileContainer.style.display = "none";
+            videoPreview.style.display = "none";
+            videoPreview.src = "";
+        }
+
+        function uploadAndProcessVideo() {
+            const fileInput = document.getElementById('fileInput');
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            const errorMessage = document.getElementById('errorMessage');
+            const processedVideo = document.getElementById('processedVideo');
+        
+
+            if (fileInput.files.length === 0) {
+                alert("Please upload a video file first.");
+                return;
+            }
+
+            loadingSpinner.style.display = "block";
+            errorMessage.style.display = "none";
+            processedVideo.style.display = "none";
+
+            const formData = new FormData();
+            formData.append('video', fileInput.files[0]);
+
+            fetch('/process_video', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                loadingSpinner.style.display = "none";
+
+                if (data.video_url) {
+
+                    processedVideo.src = data.video_url;
+                    processedVideo.style.display = "block";
+
+                } else {
+                    throw new Error("Processing failed.");
+                }
+            })
+            .catch(error => {
+                loadingSpinner.style.display = "none";
+                errorMessage.style.display = "block";
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>

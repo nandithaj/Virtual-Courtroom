@@ -1,0 +1,120 @@
+body {
+    margin: 0;             
+    /*background-color: #f18973; /* Set background image */
+     /*background-repeat: no-repeat;*/ /* Ensure the image doesn't repeat */
+     background-image: url('backgrnd.jpg');
+     background-size: cover; 
+    background-position: center; /*Center the image */
+    text-align: center;
+    
+
+}
+body h1{
+    color:#f4e1d2;
+    font-size: 3vw;
+}
+.main_container{
+    display: flex;
+    justify-content: center;
+    gap: 5vw;
+    flex-wrap: wrap;
+}
+.first_container, .second_container{
+    background-color: rgba(255, 255, 255, 0.5);
+    display: flex;
+    flex-direction: column;
+    border-radius: 30px;
+    position: relative; /* Position the element relative to the body */
+     /* Move to the center horizontally */
+    justify-items: center;
+    align-items: center;
+    justify-content: center;
+    width: 40vw;
+    height: 75vh;
+    padding: 20px 20px;
+    box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.2);
+}
+.second_container{
+    margin-bottom: 40px;
+}
+#videoPreview{
+    max-height: 100%;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    margin-top: 20px;
+    border-radius: 10px;
+    display: none;
+}
+#processedVideo{
+    max-height: 100%;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    margin-top: 20px;
+    border-radius: 10px;
+    display: none;
+}
+
+
+.first_container button{
+    position: relative;
+    display: block;/* Make buttons block-level elements */
+    width: 50%; /* Full width buttons */
+    padding: 20px;
+    margin: 10px 0; /* Add space between buttons */
+    font-size: 16px;
+    border: none;
+    border-radius: 10px; /* Rounded button corners */
+    cursor: pointer;
+    background-color: rgba(255,255,255, 0.6);/* Blue color */
+    color: black;
+    border-width: 10px;
+    box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.2);
+
+}
+
+#fileInput {
+    display: none; /* Hide the input field */
+}
+
+.first_container button:hover {
+    opacity: 0.8; /* Slightly dim on hover */
+}
+.btn-primary{
+    position: relative;
+    
+}
+.btn-secondary{
+    position: relative;
+    
+}
+.cancel_button{
+    font-size: 20px;           /* Size of the "×" */
+    font-weight: bold;         /* Make it bold */
+    color: black;                /* Color of the cross */
+    cursor: pointer;           /* Change cursor to pointer on hover */
+    margin-left: 10px;
+}
+ /* Loading Spinner */
+ .spinner {
+    display: none; /* Initially hidden */
+    margin: 20px auto;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid black;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+ }
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.second_container{
+    justify-content: center; /* Center horizontally */
+    align-items: center; 
+}
+
